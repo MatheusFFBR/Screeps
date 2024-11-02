@@ -1,0 +1,5 @@
+Game.spawns['Spawn1'].spawnCreep([WORK,MOVE,CARRY], 'harvest')
+Game.creeps['harvest1'].memory.role = 'harvest'
+
+
+
