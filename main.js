@@ -8,6 +8,16 @@ var creeps = Game.creeps;
 
 //console.log(Game.time, " | ", Game.time % 50);
 if(Game.time % 10 === 0){
+
+    //Limpa a memoria de Creeps mortos
+    for(var i in Memory.creeps) {
+        if(!Game.creeps[i]) {
+            delete Memory.creeps[i];
+            console.log('Removendo memoria do Creep Morto');
+        }
+    }
+
+    //Ativa o controle de Spawn
     colonySpawner.run();
 }
 
@@ -37,10 +47,3 @@ for (creep in creeps){
     }
 }
 
-//Limpa a memoria de Creeps mortos
-for(var i in Memory.creeps) {
-    if(!Game.creeps[i]) {
-        delete Memory.creeps[i];
-        console.log('Removendo memoria do Creep Morto');
-    }
-}

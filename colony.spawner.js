@@ -10,15 +10,10 @@
 module.exports = {
 
     run(){
-        this.controllCreepMiner();
-        
-
-        if(Game.time >= 60){
-            this.controllCreepQuery();
-        }
-
-        if(Game.time >= 1000){
-            this.controllCreepBuilder();
+        if(!this.controllCreepMiner()){
+            if(!this.controllCreepQuery()){
+                this.controllCreepBuilder();
+            }
         }
     },
 
@@ -47,8 +42,10 @@ module.exports = {
                         }
                     }
                 );
-            }
+                return true;
+            }   
         }
+        return false;
     },
 
     // Controla o Spawn e Query's para cada fonte de Energia no Spawn1
@@ -77,8 +74,10 @@ module.exports = {
                         }
                     }
                 )
+                return true;
             }
         }
+        return false;
     },
 
     // Controla o Spawn de Builder's para para o Spawn1
@@ -103,5 +102,6 @@ module.exports = {
                 }
             )
         }
+        return true;
     }
 };
