@@ -11,8 +11,11 @@ module.exports = {
 
     run(){
         this.controllCreepMiner();
-        this.controllCreepQuery();
+        
 
+        if(Game.time >= 60){
+            this.controllCreepQuery();
+        }
 
         if(Game.time >= 1000){
             this.controllCreepBuilder();
