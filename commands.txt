@@ -3,3 +3,7 @@ Game.creeps['harvest1'].memory.role = 'harvest'
 
 
 
+Remover construction site:
+
+const sites = Game.spawns['Spawn1'].room.find(FIND_CONSTRUCTION_SITES);
+for (const site of sites) { site.remove(); }
