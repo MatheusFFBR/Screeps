@@ -12,7 +12,11 @@ module.exports = {
     run(){
         this.controllCreepMiner();
         this.controllCreepQuery();
-        this.controllCreepBuilder();
+
+
+        if(Game.time >= 1000){
+            this.controllCreepBuilder();
+        }
     },
 
     // Controla o Spawn de Mineradores para cada Fonte de Energia no Spawn1
