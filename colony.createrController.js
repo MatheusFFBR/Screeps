@@ -20,7 +20,7 @@ module.exports = {
         var spawns = Game.spawns;
         for(var spawn in spawns){
             
-            if(spawns[spawn].store.getFreeCapacity(RESOURCE_ENERGY) < 50){
+            if(spawns[spawn].store.getFreeCapacity(RESOURCE_ENERGY) == 0){
 
                 //Tenta gerar uma extenção proxima do Spawn
                 var area = spawns[spawn].room.lookAtArea(

@@ -34,9 +34,10 @@ module.exports = {
             }
 
             //Verifica se a mina de energia não está sendo consumida totalmente a tada ciclo e permite o spawn de novos creeps adicionais
-                if(sources[source].energy > 1500 && sources[source].ticksToRegeneration < 60){
-                    if(Game.spawns['Spawn1'].room.findPath(Game.spawns['Spawn1'].pos, sources[source].pos , {ignoreCreeps: false}) != null){
-                        creepQntMax = creepQnt++;
+                if(sources[source].energy > 1000 && sources[source].ticksToRegeneration < 10){
+                    if(Game.spawns['Spawn1'].room.findPath(Game.spawns['Spawn1'].pos, sources[source].pos , {ignoreCreeps: false}).length > 1){
+                        console.log('Mina não consumida' + creepQntMax + ' | ' + creepQnt)
+                        creepQntMax = creepQnt + 1;
                     }
                 }
             //
@@ -83,7 +84,7 @@ module.exports = {
             for(var qnt of resourceDropped){
                 resourceDroppedQnt =+ qnt.amount;
             }
-            if(resourceDroppedQnt > 150){
+            if(resourceDroppedQnt >= 100){
                 creepQntMax = creepQnt++;
             }
 

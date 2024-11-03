@@ -6,7 +6,7 @@ var colonyCreaterController = require("colony.createrController");
 
 var creeps = Game.creeps;
 
-console.log(Game.time, " | ", Game.time % 10);
+//console.log(Game.time, " | ", Game.time % 10);
 if(Game.time % 10 === 0){
 
     //Limpa a memoria de Creeps mortos
