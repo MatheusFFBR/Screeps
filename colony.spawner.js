@@ -24,14 +24,26 @@ module.exports = {
 
         for(var source in sources){
             var creepQnt = 0;
+            var creepQntMax = 1;
 
+            //Verifica a quantidade de Miner
             for(var creep in creeps){
                 if(Game.creeps[creep].memory.sourceID == sources[source].id && Game.creeps[creep].memory.role == 'Miner'){
                     creepQnt++;
                 }
             }
 
-            if(creepQnt < 1){
+            //Verifica se a mina de energia não está sendo consumida totalmente a tada ciclo e permite o spawn de novos creeps adicionais
+                if(sources[source].energy > 1500 && sources[source].ticksToRegeneration < 60){
+                    if(Game.spawns['Spawn1'].room.findPath(Game.spawns['Spawn1'].pos, sources[source].pos , {ignoreCreeps: false}) != null){
+                        creepQntMax = creepQnt++;
+                    }
+                }
+            //
+
+
+            //Verifica a quantidade de Miner atuais e realiza o spawn de novos creeps
+            if(creepQnt < creepQntMax){
                 Game.spawns['Spawn1'].spawnCreep(
                     [WORK,WORK,MOVE], 
                     'Miner' + Game.time, 
@@ -54,7 +66,10 @@ module.exports = {
         var creeps = Game.creeps;
 
         for(var source in sources){
+
+            //Verifica a quantidade de Querys
             var creepQnt = 0;
+            var creepQntMax = 2;
 
             for(var creep in creeps){
                 if(Game.creeps[creep].memory.sourceID == sources[source].id && Game.creeps[creep].memory.role == 'Query'){
@@ -62,7 +77,18 @@ module.exports = {
                 }
             }
 
-            if(creepQnt < 2){
+            //Verifica a quantidade de itens dropados no Chão e permite o spawn de Querys adicionais
+            var resourceDropped = Game.spawns['Spawn1'].room.find(FIND_DROPPED_RESOURCES);
+            var resourceDroppedQnt = null;
+            for(var qnt of resourceDropped){
+                resourceDroppedQnt =+ qnt.amount;
+            }
+            if(resourceDroppedQnt > 150){
+                creepQntMax = creepQnt++;
+            }
+
+            //Verifica a quantidade de Querys atuais e realiza o spawn de novos creeps
+            if(creepQnt < creepQntMax){
                 Game.spawns['Spawn1'].spawnCreep(
                     [MOVE,CARRY,WORK],
                     'Query' + Game.time,

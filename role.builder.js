@@ -15,7 +15,7 @@ module.exports = {
             this.constructionSiteRoads(creep);
         }
 
-        this.buildRoads(creep);
+        this.build(creep);
     },
 
     //Busca novos caminhos para construir
@@ -41,16 +41,17 @@ module.exports = {
     },
 
     //Busca locais de construções pendentes
-    buildRoads: function(creep){
+    build: function(creep){
         var target = Game.creeps[creep].pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
         if(target){
             if(Game.creeps[creep].build(target) ){
                 Game.creeps[creep].moveTo(target);
             }
+            
 
             if(Game.creeps[creep].build(target) == ERR_NOT_ENOUGH_ENERGY || Game.creeps[creep].build(target) == ERR_NOT_ENOUGH_RESOURCES){
-
-                if(Game.spawns['Spawn1'].store.getUsedCapacity(RESOURCE_ENERGY >= 300)){
+                
+                if(Game.spawns['Spawn1'].store.getUsedCapacity(RESOURCE_ENERGY) >= 260){
                     if(Game.creeps[creep].withdraw(Game.spawns['Spawn1'],RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
                         Game.creeps[creep].moveTo(Game.spawns['Spawn1'])
                     }
